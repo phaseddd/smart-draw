@@ -100,10 +100,14 @@ export default function CombinedSettingsModal({
    */
   const handleSave = () => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem(
-        'smart-diagram-access-password',
-        password,
-      );
+      // 只有在“访问密码”模式下才更新访问密码本身，
+      // 切换到“本地配置”模式时保留之前保存的访问密码
+      if (usePassword) {
+        localStorage.setItem(
+          'smart-diagram-access-password',
+          password,
+        );
+      }
       localStorage.setItem(
         'smart-diagram-use-password',
         usePassword.toString(),
