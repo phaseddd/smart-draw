@@ -46,6 +46,14 @@ export default function AppHeader() {
         
         {/* Right Actions */}
         <div className="flex items-center gap-3 sm:gap-4 ml-auto">
+          {/* Notice Button */}
+          <button
+            type="button"
+            onClick={handleNoticeClick}
+            className="text-xs font-medium px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-50 to-rose-50 text-pink-600 border border-pink-200 hover:from-pink-100 hover:to-rose-100 hover:text-pink-700 hover:border-pink-300 transition-all shadow-sm active:scale-95"
+          >
+            🎁 限时领 Key
+          </button>
           {/* GitHub Link */}
           <a
             href="https://github.com/liujuntao123/smart-draw"
@@ -65,14 +73,6 @@ export default function AppHeader() {
             </svg>
           </a>
 
-          {/* Notice Button */}
-          <button
-            type="button"
-            onClick={handleNoticeClick}
-            className="text-xs font-medium px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-50 to-rose-50 text-pink-600 border border-pink-200 hover:from-pink-100 hover:to-rose-100 hover:text-pink-700 hover:border-pink-300 transition-all shadow-sm active:scale-95"
-          >
-            🎁 限时领 Key
-          </button>
         </div>
       </header>
 

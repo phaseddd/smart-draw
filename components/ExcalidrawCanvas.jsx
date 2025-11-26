@@ -136,6 +136,7 @@ export default function ExcalidrawCanvas({ elements, onChange, showNotification 
         key={canvasKey}
         excalidrawAPI={(api) => setExcalidrawAPI(api)}
         onChange={handleChange}
+        langCode="zh-CN"
         initialData={{
           elements: convertedElements,
           appState: {

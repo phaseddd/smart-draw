@@ -72,6 +72,20 @@ export default function FloatingChat({
 }) {
   const [isOpen, setIsOpen] = useState(true);
   const panelRef = useRef(null);
+
+  // ✨ 收起按钮的可拖拽位置状态
+  const [collapsedY, setCollapsedY] = useState(() => {
+    // 从 localStorage 读取保存的位置，默认 168px (top-42 = 10.5rem = 168px)
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('smart-diagram-collapsed-btn-y');
+      if (saved) return parseInt(saved, 10);
+    }
+    return 168;
+  });
+  const isDraggingRef = useRef(false);
+  const hasDraggedRef = useRef(false); // 标记是否发生过真正的拖拽
+  const dragStartYRef = useRef(0);
+  const dragStartTopRef = useRef(0);
   const [input, setInput] = useState('');
   const [images, setImages] = useState([]); // {file, url, name, type}
   const [files, setFiles] = useState([]); // {file, name, type, size}
@@ -343,20 +357,75 @@ export default function FloatingChat({
     }
   };
 
+  // ✨ 拖拽处理函数
+  const handleDragStart = (e) => {
+    // 阻止默认行为，避免选中文本
+    e.preventDefault();
+    isDraggingRef.current = true;
+    hasDraggedRef.current = false; // 重置拖拽标记
+    dragStartYRef.current = e.clientY || e.touches?.[0]?.clientY || 0;
+    dragStartTopRef.current = collapsedY;
+
+    // 用于存储最新的 Y 值，解决闭包问题
+    let latestY = collapsedY;
+
+    const handleDragMove = (moveEvent) => {
+      if (!isDraggingRef.current) return;
+      const clientY = moveEvent.clientY || moveEvent.touches?.[0]?.clientY || 0;
+      const deltaY = clientY - dragStartYRef.current;
+      // 超过 5px 的移动才算真正的拖拽
+      if (Math.abs(deltaY) > 5) {
+        hasDraggedRef.current = true;
+      }
+      const newY = dragStartTopRef.current + deltaY;
+      // 限制在视口范围内（留出按钮高度的边距）
+      const minY = 16;
+      const maxY = window.innerHeight - 72;
+      const clampedY = Math.max(minY, Math.min(maxY, newY));
+      latestY = clampedY;
+      setCollapsedY(clampedY);
+    };
+
+    const handleDragEnd = () => {
+      isDraggingRef.current = false;
+      if (hasDraggedRef.current) {
+        // 保存位置到 localStorage
+        localStorage.setItem('smart-diagram-collapsed-btn-y', String(latestY));
+      }
+      document.removeEventListener('mousemove', handleDragMove);
+      document.removeEventListener('mouseup', handleDragEnd);
+      document.removeEventListener('touchmove', handleDragMove);
+      document.removeEventListener('touchend', handleDragEnd);
+    };
+
+    document.addEventListener('mousemove', handleDragMove);
+    document.addEventListener('mouseup', handleDragEnd);
+    document.addEventListener('touchmove', handleDragMove, { passive: false });
+    document.addEventListener('touchend', handleDragEnd);
+  };
+
   if (!isOpen) {
     return (
       <button
-        onClick={() => setIsOpen(true)}
-        className="fixed top-42 right-6 w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-xl shadow-primary/20 hover:shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center z-50"
+        onMouseDown={handleDragStart}
+        onTouchStart={handleDragStart}
+        onClick={() => {
+          // 只有在没有发生拖拽时才触发点击
+          if (!hasDraggedRef.current) {
+            setIsOpen(true);
+          }
+        }}
+        style={{ top: collapsedY }}
+        className="fixed right-2 w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-xl shadow-primary/20 hover:shadow-2xl hover:scale-105 active:scale-95 transition-shadow cursor-grab active:cursor-grabbing flex items-center justify-center z-50 select-none"
       >
-        <WandSparkles className="w-6 h-6" />
+        <WandSparkles className="w-6 h-6 pointer-events-none" />
       </button>
     );
   }
 
   return (
     <>
-    <Card ref={panelRef} className="fixed top-42 bottom-16 right-4 w-[380px] md:w-[380px] h-auto shadow-2xl flex flex-col z-50 bg-white/95 supports-[backdrop-filter]:bg-white/85 backdrop-blur-xl border border-zinc-200 rounded-[24px] overflow-hidden">
+    <Card ref={panelRef} className="fixed top-42 bottom-16 right-2 md:w-[360px] h-auto shadow-2xl flex flex-col z-50 bg-white/95 supports-[backdrop-filter]:bg-white/85 backdrop-blur-xl border border-zinc-200 rounded-[24px] overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-3 bg-white/50 border-b border-zinc-100/50">
         {/* ✨ v6.0: 左侧 - 引擎切换下拉菜单 */}

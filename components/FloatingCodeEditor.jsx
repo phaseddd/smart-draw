@@ -339,7 +339,7 @@ export default function FloatingCodeEditor({
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-16 left-6 w-12 h-12 bg-zinc-900 text-white rounded-full shadow-lg shadow-zinc-900/20 hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center z-40 group"
+        className="fixed bottom-16 left-4 w-12 h-12 bg-zinc-900 text-white rounded-full shadow-lg shadow-zinc-900/20 hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center z-40 group"
         title="展开代码编辑器"
       >
         <Terminal className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
@@ -349,7 +349,7 @@ export default function FloatingCodeEditor({
 
   // 展开状态 - 显示完整编辑器面板
   return (
-    <Card className="fixed bottom-16 left-4 w-[360px] h-[46vh] shadow-2xl flex flex-col z-40 bg-white/95 supports-[backdrop-filter]:bg-white/90 backdrop-blur-xl border border-zinc-200/80 rounded-2xl overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-300">
+    <Card className="fixed bottom-16 left-2 w-[440px] h-[50vh] shadow-2xl flex flex-col z-40 bg-white/95 supports-[backdrop-filter]:bg-white/90 backdrop-blur-xl border border-zinc-200/80 rounded-2xl overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-300">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-zinc-50/80 border-b border-zinc-100">
         <div className="flex items-center gap-2">
