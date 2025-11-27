@@ -55,6 +55,33 @@ export default function AppHeader() {
           >
             🎁 限时领 Key
           </button>
+          {/* Buy Me a Coffee Button */}
+          <button
+            type="button"
+            onClick={() => setIsSponsorOpen(true)}
+            className="text-xs font-medium px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-50 to-orange-50 text-amber-600 border border-amber-200 hover:from-amber-100 hover:to-orange-100 hover:text-amber-700 hover:border-amber-300 transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
+            aria-label="Buy me a coffee"
+            title="Buy me a coffee"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+              <line x1="6" y1="1" x2="6" y2="4" />
+              <line x1="10" y1="1" x2="10" y2="4" />
+              <line x1="14" y1="1" x2="14" y2="4" />
+            </svg>
+            <span>Buy me a coffee</span>
+          </button>
           {/* Documentation Link */}
           <a
             href="https://smart-draw-doc.aizhi.site"
@@ -79,32 +106,6 @@ export default function AppHeader() {
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
             </svg>
           </a>
-          {/* Buy Me a Coffee Button */}
-          <button
-            type="button"
-            onClick={() => setIsSponsorOpen(true)}
-            className="text-gray-500 hover:text-gray-900 transition-colors p-1.5 hover:bg-gray-100 rounded-full"
-            aria-label="Buy me a coffee"
-            title="Buy me a coffee"
-          >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
-              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
-              <line x1="6" y1="1" x2="6" y2="4" />
-              <line x1="10" y1="1" x2="10" y2="4" />
-              <line x1="14" y1="1" x2="14" y2="4" />
-            </svg>
-          </button>
           {/* GitHub Link */}
           <a
             href="https://github.com/liujuntao123/smart-draw"
