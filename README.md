@@ -106,22 +106,28 @@ pnpm dev
 
 ```yaml
 services:
-  smart-diagram:
-    image: ghcr.io/liujuntao123/smart-diagram:latest
+  smart-draw:
+    image: ghcr.io/liujuntao123/smart-draw:latest
     ports:
       - "3010:3000"
+    env_file:
+      - .env  # 可选：从 .env 文件读取环境变量
     environment:
       - NODE_ENV=production
-      # Server-side LLM configuration (optional)
-      # - ACCESS_PASSWORD=your-secure-password
-      # - SERVER_LLM_TYPE=openai
-      # - SERVER_LLM_BASE_URL=https://api.openai.com/v1
-      # - SERVER_LLM_API_KEY=sk-your-api-key-here
-      # - SERVER_LLM_MODEL=gpt-4
     restart: unless-stopped
 ```
 
-2. 启动容器：
+2. 如需配置服务器端 LLM，创建 `.env` 文件（参考 `.env.example`）：
+
+```bash
+ACCESS_PASSWORD=your-secure-password
+SERVER_LLM_TYPE=openai
+SERVER_LLM_BASE_URL=https://api.openai.com/v1
+SERVER_LLM_API_KEY=sk-your-api-key-here
+SERVER_LLM_MODEL=gpt-4
+```
+
+3. 启动容器：
 
 ```bash
 docker-compose up -d
@@ -132,7 +138,7 @@ docker-compose up -d
 ### 方式二：直接使用 Docker
 
 ```bash
-docker run -d -p 3010:3000 ghcr.io/liujuntao123/smart-diagram:latest
+docker run -d -p 3010:3000 ghcr.io/liujuntao123/smart-draw:latest
 ```
 
 ### 配置服务器端 LLM（可选）

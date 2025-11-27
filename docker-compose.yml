@@ -1,14 +1,10 @@
 services:
-  smart-diagram:
-    image: ghcr.io/liujuntao123/smart-diagram:latest
+  smart-draw:
+    image: ghcr.io/liujuntao123/smart-draw:latest
     ports:
       - "3010:3000"
+    env_file:
+      - .env
     environment:
       - NODE_ENV=production
-      # Server-side LLM configuration (optional)
-      # - ACCESS_PASSWORD=your-secure-password
-      # - SERVER_LLM_TYPE=openai
-      # - SERVER_LLM_BASE_URL=https://api.openai.com/v1
-      # - SERVER_LLM_API_KEY=sk-your-api-key-here
-      # - SERVER_LLM_MODEL=gpt-4
     restart: unless-stopped
