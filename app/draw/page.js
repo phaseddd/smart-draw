@@ -240,7 +240,7 @@ export default function DrawPage() {
           detail: {
             engineType,
             code: targetCode,
-            open:true,
+            // open:true,
           },
         }),
       );
