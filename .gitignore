@@ -45,4 +45,8 @@ next-env.d.ts
 .vscode
 
 # claude
-.claude
+.claude/
+.bmad-core/
+.spec-workflow/
+CLAUDE.md
+**/CLAUDE.md
