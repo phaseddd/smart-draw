@@ -64,6 +64,15 @@ export default function DrawPage() {
   // 待恢复的历史记录（用于引擎切换后自动恢复）
   const [pendingHistory, setPendingHistory] = useState(null);
 
+  // Notification helpers (定义在使用它们的 useEffect 之前，避免 TDZ 问题)
+  const showNotification = useCallback((opts) => {
+    setNotification({ isOpen: true, title: opts.title || '', message: opts.message || '', type: opts.type || 'info' });
+  }, []);
+
+  const closeNotification = useCallback(() => {
+    setNotification(prev => ({ ...prev, isOpen: false }));
+  }, []);
+
   // 清空悬浮代码编辑器缓存和内容（在引擎切换时调用）
   const clearFloatingCodeCache = useCallback(() => {
     if (typeof window === 'undefined') return;
@@ -202,15 +211,6 @@ export default function DrawPage() {
     };
     window.addEventListener('chatpanel-visibility-change', onVisibility);
     return () => window.removeEventListener('chatpanel-visibility-change', onVisibility);
-  }, []);
-
-  // Notification helpers
-  const showNotification = useCallback((opts) => {
-    setNotification({ isOpen: true, title: opts.title || '', message: opts.message || '', type: opts.type || 'info' });
-  }, []);
-
-  const closeNotification = useCallback(() => {
-    setNotification(prev => ({ ...prev, isOpen: false }));
   }, []);
 
   /**
