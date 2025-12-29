@@ -359,7 +359,7 @@ export default function ConfigManager({ isOpen, onClose, onConfigSelect }) {
                           <CheckCircle2 className="w-4 h-4" />
                         </button>
                       )}
-                      <button
+                      {/* <button
                         onClick={() => handleTestConnection(config)}
                         disabled={isLoading}
                         title="测试连接"
@@ -369,7 +369,7 @@ export default function ConfigManager({ isOpen, onClose, onConfigSelect }) {
                         )}
                       >
                         {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Activity className="w-4 h-4" />}
-                      </button>
+                      </button> */}
                       <button
                         onClick={() => handleEdit(config)}
                         title="编辑"

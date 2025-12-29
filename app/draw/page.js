@@ -420,7 +420,7 @@ export default function DrawPage() {
     // <div className="flex flex-col h-screen bg-gray-50" style={{ paddingRight: chatPanelWidth || 0 }}>
     <div className="flex flex-col h-screen bg-gray-50" style={{ paddingRight: 0 }}>
       {/* Header */}
-      <AppHeader />
+      <AppHeader onOpenSettings={() => setIsCombinedSettingsOpen(true)} />
 
       {/* Main Content - Full Screen Canvas */}
       <div className="flex-1 overflow-hidden">
@@ -440,7 +440,6 @@ export default function DrawPage() {
         onNewChat={handleNewChat}
         conversationId={engine.conversationId}
         onOpenHistory={() => setIsHistoryModalOpen(true)}
-        onOpenSettings={() => setIsCombinedSettingsOpen(true)}
       />
 
       {/* Floating Code Editor */}

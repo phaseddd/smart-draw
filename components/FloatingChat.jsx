@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { WandSparkles, Send, Plus, Image as ImageIcon, Bot, MessageSquarePlus, Minimize2, Copy, Check, Code2, X as XIcon, FileText, CheckCircle2, ChevronDown, SquareMousePointer, Settings, Clock, MoveUp, RefreshCw } from 'lucide-react';
+import { WandSparkles, Send, Plus, Image as ImageIcon, Bot, MessageSquarePlus, Minimize2, Copy, Check, Code2, X as XIcon, FileText, CheckCircle2, ChevronDown, SquareMousePointer, Clock, MoveUp, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/Button.jsx';
 import { Textarea } from '@/components/ui/textarea';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -67,7 +67,6 @@ export default function FloatingChat({
   onApplyCode, // ✨ v6.0: 应用代码回调
   conversationId,
   onOpenHistory,
-  onOpenSettings,
   onRetryMessage,
 }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -472,15 +471,6 @@ export default function FloatingChat({
 
         {/* 右侧 - 操作按钮 */}
         <div className="flex items-center gap-1">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg"
-            title="配置"
-            onClick={() => onOpenSettings && onOpenSettings()}
-          >
-            <Settings className="w-4 h-4" />
-          </Button>
           <Button
             variant="ghost"
             size="icon"

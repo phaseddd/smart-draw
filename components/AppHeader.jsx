@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Settings } from "lucide-react";
 
-export default function AppHeader() {
+export default function AppHeader({ onOpenSettings }) {
   const router = useRouter();
   const [isNoticeOpen, setIsNoticeOpen] = useState(false);
   const [isSponsorOpen, setIsSponsorOpen] = useState(false);
@@ -53,7 +54,7 @@ export default function AppHeader() {
             onClick={handleNoticeClick}
             className="text-xs font-medium px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-50 to-rose-50 text-pink-600 border border-pink-200 hover:from-pink-100 hover:to-rose-100 hover:text-pink-700 hover:border-pink-300 transition-all shadow-sm active:scale-95"
           >
-            🎁 限时领 Key
+            🎁 获取访问密码
           </button>
           {/* Buy Me a Coffee Button */}
           <button
@@ -81,6 +82,16 @@ export default function AppHeader() {
               <line x1="14" y1="1" x2="14" y2="4" />
             </svg>
             <span>请作者喝杯奶茶</span>
+          </button>
+          {/* Settings Button */}
+          <button
+            type="button"
+            onClick={() => onOpenSettings && onOpenSettings()}
+            className="text-gray-500 hover:text-gray-900 transition-colors p-1.5 hover:bg-gray-100 rounded-full"
+            aria-label="配置"
+            title="配置"
+          >
+            <Settings className="w-[22px] h-[22px]" />
           </button>
           {/* Documentation Link */}
           <a
@@ -134,7 +145,7 @@ export default function AppHeader() {
           <div className="relative bg-white rounded-xl border border-gray-200 w-full max-w-sm mx-4 overflow-hidden shadow-2xl transform transition-all">
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-gray-50/50">
               <h2 className="text-sm font-semibold text-gray-800">
-                🎁 进群限时领取免费 claude-4.5-sonnet key
+                🎁 进群获取访问密码，直接使用AI绘图功能
               </h2>
               <button
                 type="button"

@@ -108,7 +108,6 @@ export default function FloatingCodeEditor({
         const detail = event?.detail || {};
         const eventEngineType = detail.engineType;
         const newCode = detail.code;
-        const open = detail.open;
 
         if (typeof newCode !== 'string' || !newCode.trim()) return;
         if (eventEngineType && eventEngineType !== engineType) return;
@@ -122,10 +121,6 @@ export default function FloatingCodeEditor({
           canvasCode: newCode,
           lastSource: 'canvas',
         });
-
-        if (!isOpen&&open) {
-          setIsOpen(true);
-        }
       } catch (error) {
         console.error('Canvas code change handler error:', error);
       }
@@ -205,7 +200,6 @@ export default function FloatingCodeEditor({
     // 将缓存内容恢复到编辑器
     setLocalCode(cachedCode);
     prevCodeRef.current = cachedCode;
-    setIsOpen(true);
 
     // 避免 LLM 初始消息被误判为“新消息”而再次自动应用
     prevMessagesLengthRef.current = messages.length;
@@ -279,7 +273,6 @@ export default function FloatingCodeEditor({
           // 先填入编辑器
           setLocalCode(codeContent);
           prevCodeRef.current = codeContent;
-          setIsOpen(true);
 
           // 再自动应用到画布
           handleApply(codeContent);
